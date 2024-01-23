@@ -1,6 +1,6 @@
-import { Box, Link, Paper, Typography } from '@mui/material'
-import { Link as RouteLink } from 'wouter'
+import { Box, Typography } from '@mui/material'
 import { Empty } from './empty'
+import { AppLink } from '../routing/app-link'
 
 interface PageLayoutProps {
   title?: string
@@ -11,19 +11,25 @@ interface PageLayoutProps {
 export const PageLayout = (props: PageLayoutProps) => {
   return (
     <Box
+      p={2}
       display="flex"
       flexDirection="column"
       alignItems="center"
       maxWidth="768px"
       margin="0 auto"
+      minHeight="100vh"
     >
-      <RouteLink href="/">
-        <Link variant="h1">{props.title || 'Star Wars'}</Link>
-      </RouteLink>
-      {props.description && (
-        <Typography fontWeight={600}>{props.description}</Typography>
-      )}
-      <Paper sx={{ mt: 2, p: 4 }}>{props.children || <Empty />}</Paper>
+      <AppLink
+        href="/"
+        variant="h1"
+        title={props.title || 'Star Wars'}
+        fontWeight={600}
+        sx={{ textDecoration: 'none' }}
+      />
+      {props.description && <Typography>{props.description}</Typography>}
+      <Box mt={4} width="100%">
+        {props.children || <Empty />}
+      </Box>
     </Box>
   )
 }
