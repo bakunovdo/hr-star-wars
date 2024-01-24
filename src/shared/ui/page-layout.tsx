@@ -1,6 +1,8 @@
 import { Box, Typography } from '@mui/material'
+
+import { AppLink } from '~shared/routing/app-link'
+
 import { Empty } from './empty'
-import { AppLink } from '../routing/app-link'
 
 interface PageLayoutProps {
   title?: string

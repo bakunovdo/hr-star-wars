@@ -1,11 +1,12 @@
-import { CssBaseline, ThemeProvider, createTheme } from '@mui/material'
-import { HeroPage } from '../pages/hero'
-import { HomePage } from '../pages/home'
-
 import './_side-imports'
 
+import { CssBaseline, ThemeProvider, createTheme } from '@mui/material'
 import { Route, Switch } from 'wouter'
-import { PageLayout } from '../shared/ui/page-layout'
+
+import { HeroPage } from '~pages/hero'
+import { HomePage } from '~pages/home'
+
+import { PageLayout } from '~shared/ui/page-layout'
 
 const darkTheme = createTheme({
   palette: {

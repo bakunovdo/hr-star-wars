@@ -1,5 +1,6 @@
 import { Box } from '@mui/material'
-import { PeopleListItem } from '../entities/people'
+
+import { PeopleMock, PeopleListItem } from '~entities/people'
 
 export const HeroList = () => {
   return (
@@ -10,11 +11,11 @@ export const HeroList = () => {
       mx="auto"
       gap={2}
     >
-      <PeopleListItem />
-      <PeopleListItem />
-      <PeopleListItem />
-      <PeopleListItem />
-      <PeopleListItem />
+      <PeopleListItem id="1" {...PeopleMock} />
+      <PeopleListItem id="2" {...PeopleMock} />
+      <PeopleListItem id="3" {...PeopleMock} />
+      <PeopleListItem id="4" {...PeopleMock} />
+      <PeopleListItem id="5" {...PeopleMock} />
     </Box>
   )
 }
