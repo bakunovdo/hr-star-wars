@@ -12,24 +12,10 @@ interface PageLayoutProps {
 
 export const PageLayout = (props: PageLayoutProps) => {
   return (
-    <Box
-      p={2}
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      maxWidth="768px"
-      margin="0 auto"
-      minHeight="100vh"
-    >
-      <AppLink
-        href="/"
-        variant="h1"
-        title={props.title || 'Star Wars'}
-        fontWeight={600}
-        sx={{ textDecoration: 'none' }}
-      />
+    <Box p={2} display="flex" flexDirection="column" alignItems="center" maxWidth="640px" margin="0 auto" height="100vh" overflow="hidden">
+      <AppLink href="/" variant="h1" title={props.title || 'Star Wars'} fontWeight={600} sx={{ textDecoration: 'none' }} />
       {props.description && <Typography>{props.description}</Typography>}
-      <Box mt={4} width="100%">
+      <Box mt={4} width="100%" sx={{ overflowY: 'auto' }}>
         {props.children || <Empty />}
       </Box>
     </Box>

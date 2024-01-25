@@ -1,11 +1,4 @@
-import {
-  Avatar,
-  Box,
-  Card,
-  CardActionArea,
-  CardContent,
-  Typography,
-} from '@mui/material'
+import { Avatar, Box, Card, CardActionArea, CardContent, Typography } from '@mui/material'
 
 import MaleIcon from '@mui/icons-material/Face'
 import FemaleIcon from '@mui/icons-material/Face3'
@@ -37,6 +30,9 @@ export const PeopleListItem = (props: PeopleProps) => {
             <Box display="flex" gap={2} ml="auto">
               <StatInfo title="Height" value={props.height} />
               <StatInfo title="Mass" value={props.mass} />
+              <StatInfo title="Hair color" value={props.hair_color} />
+              <StatInfo title="Eye color" value={props.eye_color} />
+              <StatInfo title="Skin color" value={props.skin_color} />
             </Box>
           </CardContent>
         </CardActionArea>
@@ -51,13 +47,20 @@ type StatInfoProps = {
 }
 
 const StatInfo = (props: StatInfoProps) => {
+  const isNone = ['unknown', 'none', 'n/a'].includes(String(props.value))
+
   return (
-    <Box>
-      <Typography variant="body2" color="text.primamry">
+    <Box maxWidth={64} maxHeight={32}>
+      <Typography variant="body2" color="text.primary" sx={{ whiteSpace: 'nowrap' }}>
         {props.title}
       </Typography>
-      <Typography variant="body2" color="text.secondary" textAlign="center">
-        {props.value}
+      <Typography
+        variant="body2"
+        color="text.secondary"
+        textAlign="center"
+        sx={{ whiteSpace: 'nowrap', textOverflow: 'ellipsis', maxWidth: 64, overflow: 'hidden' }}
+      >
+        {isNone ? '-' : props.value}
       </Typography>
     </Box>
   )

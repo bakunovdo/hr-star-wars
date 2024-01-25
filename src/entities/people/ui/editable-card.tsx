@@ -13,10 +13,7 @@ export const PeopleEditableCard = (props: PeopleEditableCardProps) => {
   }
 
   return (
-    <Card
-      variant="outlined"
-      sx={{ width: 'fit-content', mx: 'auto', position: 'relative' }}
-    >
+    <Card variant="outlined" sx={{ width: 'fit-content', minWidth: 320, mx: 'auto', position: 'relative' }}>
       <IconButton
         className="people-edit-icon"
         size="small"
@@ -27,7 +24,7 @@ export const PeopleEditableCard = (props: PeopleEditableCardProps) => {
         <EditIcon />
       </IconButton>
       <CardContent sx={{ p: 0, ':last-child': { p: 0 } }}>
-        <Box p={2} width="fit-content" textAlign="center">
+        <Box p={2} width="fit-content" mx="auto" textAlign="center">
           <AccountCircleIcon sx={{ fontSize: 120 }} />
           <Typography gutterBottom variant="h5" component="div">
             {props.name}
@@ -57,12 +54,7 @@ const StatInfo = (props: StatInfoProps) => {
       <Typography sx={{ mr: 1 }} variant="body2" color="text.primamry">
         {props.title}
       </Typography>
-      <Typography
-        sx={{ ml: 'auto' }}
-        variant="body2"
-        color="text.secondary"
-        textAlign="center"
-      >
+      <Typography sx={{ ml: 'auto' }} variant="body2" color="text.secondary" textAlign="center">
         {props.value}
       </Typography>
     </Box>
