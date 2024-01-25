@@ -1,9 +1,13 @@
-import { Box, Button, CircularProgress, Divider, Typography } from '@mui/material'
+import { Box, BoxProps, Button, CircularProgress, Divider, Typography } from '@mui/material'
 
 import { PeopleListItem, useGetAllPeople } from '~entities/people'
 
-export const HeroList = () => {
-  const query = useGetAllPeople()
+type HeroListProps = BoxProps & {
+  search?: string
+}
+
+export const HeroList = ({ search, ...boxProps }: HeroListProps) => {
+  const query = useGetAllPeople(search)
 
   if (query.isLoading) {
     return (
@@ -14,7 +18,7 @@ export const HeroList = () => {
   }
 
   return (
-    <Box display="flex" flexDirection="column" mx="1rem" gap={2}>
+    <Box display="flex" flexDirection="column" gap={2} {...boxProps}>
       {query.data?.pages.map((pagedData, idx) => {
         return (
           <>

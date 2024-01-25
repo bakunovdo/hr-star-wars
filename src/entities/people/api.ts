@@ -8,7 +8,7 @@ import { parsePageFromUrl, transformRawPersonToPerson } from './lib'
 
 const PeopleKeys = {
   _root: 'people' as const,
-  getPeople: () => [PeopleKeys._root + 's'] as const,
+  getPeople: (search: string = '') => [PeopleKeys._root + 's', search] as const,
   getPerson: (id: string) => [PeopleKeys._root, id] as const,
 }
 
@@ -18,17 +18,17 @@ const getPerson = async (id: string) => {
   return data
 }
 
-const getPeople = async (page: string) => {
-  const { data } = await httpClient.get<PaginatedResponse<People>>(`people?page=${page}`)
+const getPeople = async (page: string, search: string) => {
+  const { data } = await httpClient.get<PaginatedResponse<People>>(`people`, { params: { page, search } })
   data.results = data.results.map(transformRawPersonToPerson)
 
   return data
 }
 
-export const useGetAllPeople = () => {
+export const useGetAllPeople = (search: string = '') => {
   const query = useInfiniteQuery({
-    queryKey: PeopleKeys.getPeople(),
-    queryFn: ({ pageParam }) => getPeople(pageParam),
+    queryKey: PeopleKeys.getPeople(search),
+    queryFn: ({ pageParam }) => getPeople(pageParam, search),
     initialPageParam: '1',
     getNextPageParam: (data) => (data.next ? parsePageFromUrl(data.next) : undefined),
     getPreviousPageParam: (data) => (data.previous ? parsePageFromUrl(data.previous) : undefined),
