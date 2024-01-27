@@ -1,7 +1,7 @@
 4
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 
-import { httpClient } from '~shared/api/client'
+import { httpClient, queryClient } from '~shared/api/client'
 import { People } from './types'
 import { PaginatedResponse } from '~shared/api/types'
 import { parsePageFromUrl, transformRawPersonToPerson } from './lib'
@@ -21,6 +21,11 @@ const getPerson = async (id: string) => {
 const getPeople = async (page: string, search: string) => {
   const { data } = await httpClient.get<PaginatedResponse<People>>(`people`, { params: { page, search } })
   data.results = data.results.map(transformRawPersonToPerson)
+
+  // Manually setQuery peoples by id, avoid duplicated requests.
+  data.results.forEach((people) => {
+    queryClient.setQueryData(PeopleKeys.getPerson(people.id), people)
+  })
 
   return data
 }

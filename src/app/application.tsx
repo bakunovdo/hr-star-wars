@@ -1,6 +1,6 @@
 import './_side-imports'
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material'
@@ -10,14 +10,13 @@ import { HeroPage } from '~pages/hero'
 import { HomePage } from '~pages/home'
 
 import { PageLayout } from '~shared/ui/page-layout'
+import { queryClient } from '~shared/api/client'
 
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
   },
 })
-
-const queryClient = new QueryClient()
 
 export function Application() {
   return (
