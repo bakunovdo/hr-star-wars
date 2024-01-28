@@ -1,18 +1,18 @@
-import { Box, Card, CardContent, Grow, IconButton, TextField, Typography } from '@mui/material'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import EditIcon from '@mui/icons-material/Edit'
-import CloseIcon from '@mui/icons-material/Close'
-import CheckIcon from '@mui/icons-material/Check'
-
-import Divider from '@mui/material/Divider'
-
-import { People } from '../types'
 import { useState } from 'react'
-import { ValuesOf } from '~shared/types'
-import { Control, Controller, useForm } from 'react-hook-form'
+
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import CheckIcon from '@mui/icons-material/Check'
+import CloseIcon from '@mui/icons-material/Close'
+import EditIcon from '@mui/icons-material/Edit'
+import { Box, Card, CardContent, Grow, IconButton, TextField, Typography } from '@mui/material'
+import Divider from '@mui/material/Divider'
 import { useQueryClient } from '@tanstack/react-query'
 
+import { ValuesOf } from '~shared/types'
+import { Control, Controller, useForm } from 'react-hook-form'
+
 import { PeopleKeys } from '../api'
+import { People } from '../types'
 
 type PeopleEditableCardProps = People
 

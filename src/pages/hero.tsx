@@ -1,8 +1,9 @@
-import { PageLayout } from '../shared/ui/page-layout'
-import { PeopleEditableCard } from '../entities/people/ui/editable-card'
 import { useGetPerson } from '~entities/people'
-import { PageLoader } from '~shared/ui/page-loader'
 import { ErrorStatus } from '~shared/ui/page-error'
+import { PageLoader } from '~shared/ui/page-loader'
+
+import { PeopleEditableCard } from '../entities/people/ui/editable-card'
+import { PageLayout } from '../shared/ui/page-layout'
 
 type HeroPageProps = {
   id: string

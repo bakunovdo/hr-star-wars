@@ -1,7 +1,6 @@
-import { Avatar, Box, Card, CardActionArea, CardContent, Typography } from '@mui/material'
-
 import MaleIcon from '@mui/icons-material/Face'
 import FemaleIcon from '@mui/icons-material/Face3'
+import { Avatar, Box, Card, CardActionArea, CardContent, Typography } from '@mui/material'
 
 import { format } from '~shared/lib/date/format'
 import { AppLink } from '~shared/routing/app-link'

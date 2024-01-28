@@ -1,4 +1,5 @@
 import { Box, CircularProgress } from '@mui/material'
+
 import { PageLayout } from './page-layout'
 
 export const PageLoader = () => {

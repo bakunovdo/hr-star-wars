@@ -1,5 +1,6 @@
 import { Link, LinkProps } from '@mui/material'
-import { NavigationalProps, Link as RouteLink } from 'wouter'
+
+import { Link as RouteLink,NavigationalProps } from 'wouter'
 
 type AppLinkProps = NavigationalProps &
   LinkProps & {

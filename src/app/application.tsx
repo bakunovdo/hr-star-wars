@@ -1,16 +1,14 @@
 import './_side-imports'
 
+import { createTheme,CssBaseline, ThemeProvider } from '@mui/material'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
-import { CssBaseline, ThemeProvider, createTheme } from '@mui/material'
-import { Route, Switch } from 'wouter'
-
 import { HeroPage } from '~pages/hero'
 import { HomePage } from '~pages/home'
-
-import { PageLayout } from '~shared/ui/page-layout'
 import { queryClient } from '~shared/api/client'
+import { PageLayout } from '~shared/ui/page-layout'
+import { Route, Switch } from 'wouter'
 
 const darkTheme = createTheme({
   palette: {

@@ -1,8 +1,10 @@
+import { useState } from 'react'
+
+import ClearIcon from '@mui/icons-material/Clear'
 import { Box, IconButton, InputAdornment, TextField } from '@mui/material'
+
 import { PageLayout } from '../shared/ui/page-layout'
 import { HeroList } from '../widgets/hero-list'
-import ClearIcon from '@mui/icons-material/Clear'
-import { useState } from 'react'
 
 export const HomePage = () => {
   const [search, setSearch] = useState('')
