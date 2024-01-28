@@ -15,12 +15,12 @@ module.exports = {
           ['^\\u0000', 'models/init'],
           // Framework libs
           ['^react$', '^next', '^config'],
-          ['^axios', '^react-query', '^mobx', '^effector'],
+          ['^axios', '^react-query', 'tanstack', '^mobx', '^effector', '^wouter'],
           ['^@(?!chakra.)'],
           //Tests
           ['^@cy'],
           // UI libs
-          ['^@chakra-ui'],
+          ['^@chakra-ui', 'mui'],
           ['^@react-icons'],
           // src/ groups
           ['^app'],
