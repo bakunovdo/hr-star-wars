@@ -2,11 +2,11 @@
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 
 import { httpClient, queryClient } from '~shared/api/client'
-import { People } from './types'
+import { People, RawPeople } from './types'
 import { PaginatedResponse } from '~shared/api/types'
 import { parsePageFromUrl, transformRawPersonToPerson } from './lib'
 
-const PeopleKeys = {
+export const PeopleKeys = {
   _root: 'people' as const,
   getPeople: (search: string = '') => [PeopleKeys._root + 's', search] as const,
   getPerson: (id: string) => [PeopleKeys._root, id] as const,
@@ -14,8 +14,8 @@ const PeopleKeys = {
 
 // Raw Requests
 const getPerson = async (id: string) => {
-  const { data } = await httpClient.get<People>('people/' + id)
-  return data
+  const { data } = await httpClient.get<RawPeople>('people/' + id)
+  return transformRawPersonToPerson(data)
 }
 
 const getPeople = async (page: string, search: string) => {

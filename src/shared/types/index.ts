@@ -4,3 +4,5 @@ export type Prettify<T> = {
 } & {}
 
 export type WithId<T, TypeId = number> = Prettify<{ id: TypeId } & T>
+
+export type ValuesOf<T extends object> = T[keyof T]
