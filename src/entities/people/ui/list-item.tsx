@@ -1,3 +1,5 @@
+import { RefObject } from 'react'
+
 import MaleIcon from '@mui/icons-material/Face'
 import FemaleIcon from '@mui/icons-material/Face3'
 import { Avatar, Box, Card, CardActionArea, CardContent, Typography } from '@mui/material'
@@ -7,31 +9,34 @@ import { AppLink } from '~shared/routing/app-link'
 
 import { People } from '../types'
 
-type PeopleProps = People
+type PeopleProps = {
+  people: People
+  measureRef?: RefObject<HTMLDivElement> | React.RefCallback<HTMLDivElement>
+}
 
-export const PeopleListItem = (props: PeopleProps) => {
-  const Icon = props.gender === 'male' ? MaleIcon : FemaleIcon
+export const PeopleListItem = ({ people, measureRef }: PeopleProps) => {
+  const Icon = people.gender === 'male' ? MaleIcon : FemaleIcon
 
   return (
-    <AppLink href={`/hero/${props.id}`} sx={{ textDecoration: 'none' }}>
-      <Card>
+    <AppLink href={`/hero/${people.id}`} sx={{ textDecoration: 'none' }}>
+      <Card ref={measureRef}>
         <CardActionArea>
           <CardContent sx={{ display: 'flex' }}>
             <Avatar sx={{ mr: 2 }}>
               <Icon />
             </Avatar>
             <Box mr={1}>
-              <Typography variant="body2">{props.name}</Typography>
+              <Typography variant="body2">{people.name}</Typography>
               <Typography variant="body2" color="text.secondary">
-                {format(props.created)}
+                {format(people.created)}
               </Typography>
             </Box>
             <Box display="flex" gap={2} ml="auto">
-              <StatInfo title="Height" value={props.height} />
-              <StatInfo title="Mass" value={props.mass} />
-              <StatInfo title="Hair color" value={props.hair_color} />
-              <StatInfo title="Eye color" value={props.eye_color} />
-              <StatInfo title="Skin color" value={props.skin_color} />
+              <StatInfo title="Height" value={people.height} />
+              <StatInfo title="Mass" value={people.mass} />
+              <StatInfo title="Hair color" value={people.hair_color} />
+              <StatInfo title="Eye color" value={people.eye_color} />
+              <StatInfo title="Skin color" value={people.skin_color} />
             </Box>
           </CardContent>
         </CardActionArea>

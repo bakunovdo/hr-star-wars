@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+import { useDebounce } from '@uidotdev/usehooks'
+
 import ClearIcon from '@mui/icons-material/Clear'
 import { Box, IconButton, InputAdornment, TextField } from '@mui/material'
 
@@ -8,6 +10,8 @@ import { HeroList } from '../widgets/hero-list'
 
 export const HomePage = () => {
   const [search, setSearch] = useState('')
+
+  const debouncedSearch = useDebounce(search, 350)
 
   return (
     <PageLayout>
@@ -27,7 +31,7 @@ export const HomePage = () => {
             ),
           }}
         />
-        <HeroList search={search} />
+        <HeroList search={debouncedSearch} />
       </Box>
     </PageLayout>
   )

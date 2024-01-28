@@ -1,4 +1,8 @@
-import { Box, BoxProps, Button, CircularProgress, Divider, Typography } from '@mui/material'
+import { useEffect } from 'react'
+
+import { useIntersectionObserver } from '@uidotdev/usehooks'
+
+import { Box, BoxProps, CircularProgress, Divider, Typography } from '@mui/material'
 
 import { PeopleListItem, useGetAllPeople } from '~entities/people'
 
@@ -8,6 +12,18 @@ type HeroListProps = BoxProps & {
 
 export const HeroList = ({ search, ...boxProps }: HeroListProps) => {
   const query = useGetAllPeople(search)
+
+  const [ref, entry] = useIntersectionObserver<HTMLDivElement>({
+    root: null,
+    threshold: 0,
+    rootMargin: '0px',
+  })
+
+  useEffect(() => {
+    if (!query.hasNextPage || query.isFetchingNextPage) return
+    if (entry?.isIntersecting) query.fetchNextPage()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [entry])
 
   if (query.isLoading) {
     return (
@@ -19,26 +35,34 @@ export const HeroList = ({ search, ...boxProps }: HeroListProps) => {
 
   return (
     <Box display="flex" flexDirection="column" gap={2} {...boxProps}>
-      {query.data?.pages.map((pagedData, idx) => {
+      {query.data?.pages.map((pagedData, idxPage) => {
+        const isLastPage = query.data.pages.length === idxPage + 1
+
         return (
           <>
-            {idx !== 0 && (
+            {idxPage !== 0 && (
               <Divider>
                 <Typography variant="body2" color="text.secondary">
-                  {idx + 1}
+                  {idxPage + 1}
                 </Typography>
               </Divider>
             )}
-            {pagedData.results.map((data) => (
-              <PeopleListItem key={data.id} {...data} />
-            ))}
+            {pagedData.results.map((data, idxItem) => {
+              const isLastItem = pagedData.results.length === idxItem + 1
+              const isLastItemOnScreen = isLastItem && isLastPage
+
+              if (isLastItemOnScreen) {
+                return <PeopleListItem key={data.id} people={data} measureRef={ref} />
+              }
+
+              return <PeopleListItem key={data.id} people={data} />
+            })}
           </>
         )
       })}
 
-      <Button onClick={() => query.fetchNextPage()} disabled={!query.hasNextPage || query.isFetchingNextPage}>
-        {query.isFetchingNextPage ? 'Loading more...' : query.hasNextPage ? 'Load More' : 'Nothing more to load'}
-      </Button>
+      {query.isFetchingNextPage && <Typography>Loading more...</Typography>}
+      {!query.hasNextPage && !query.isFetchingNextPage && <Typography>Nothing more to load</Typography>}
     </Box>
   )
 }
