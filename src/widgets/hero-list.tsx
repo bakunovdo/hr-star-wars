@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 import { useIntersectionObserver } from '@uidotdev/usehooks'
 
@@ -39,7 +39,7 @@ export const HeroList = ({ search, ...boxProps }: HeroListProps) => {
         const isLastPage = query.data.pages.length === idxPage + 1
 
         return (
-          <>
+          <React.Fragment key={String(idxPage)}>
             {idxPage !== 0 && (
               <Divider>
                 <Typography variant="body2" color="text.secondary">
@@ -57,7 +57,7 @@ export const HeroList = ({ search, ...boxProps }: HeroListProps) => {
 
               return <PeopleListItem key={data.id} people={data} />
             })}
-          </>
+          </React.Fragment>
         )
       })}
 
